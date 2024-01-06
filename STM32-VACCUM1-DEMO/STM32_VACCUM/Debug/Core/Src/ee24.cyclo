@@ -1,0 +1,5 @@
+../Core/Src/ee24.c:14:8:writeEe24	4
+../Core/Src/ee24.c:52:8:clearAllEe24	2
+../Core/Src/ee24.c:69:8:readEe24	5
+../Core/Src/ee24.c:109:8:readEe24_For_Auth_admin	6
+../Core/Src/ee24.c:197:8:writeEe24_For_Auth_Admin	3
