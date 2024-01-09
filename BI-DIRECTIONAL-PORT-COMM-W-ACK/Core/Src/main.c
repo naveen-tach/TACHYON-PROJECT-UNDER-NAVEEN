@@ -48,8 +48,10 @@ UART_HandleTypeDef huart3;
 
 /* USER CODE BEGIN PV */
 
-uint16_t uartRxBuffCount = 0;
-uint8_t uartRXBuff[255] = { 0 } ;
+uint16_t uartRxBuffCount2 = 0;
+uint8_t uartRXBuff2[255] = { 0 } ;
+uint16_t uartRxBuffCount3 = 0;
+uint8_t uartRXBuff3[255] = { 0 } ;
 
 uint8_t biDirect_Flag = 0 ;
 
@@ -103,11 +105,12 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Receive_IT(&huart2,&uartRXBuff[uartRxBuffCount],1);
+  HAL_UART_Receive_IT(&huart2,&uartRXBuff2[uartRxBuffCount2],1);
+  HAL_UART_Receive_IT(&huart3,&uartRXBuff3[uartRxBuffCount3],1);
 
-  uint8_t *data = "heloo naveen\n";
+  uint8_t *data = "well come\n";
   uint8_t size = strlen(data);
-  memset(uartRXBuff,0,sizeof(uartRXBuff));
+  memset(uartRXBuff2,0,sizeof(uartRXBuff2));
   UartTransfor(&huart1,data,size);
 
 
@@ -295,25 +298,27 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 
 
+
   if(huart == &huart2){//
 	  biDirect_Flag = 2;
 
-    uartRXBuff[uartRxBuffCount] = huart->Instance->DR;
-    uartRxBuffCount++;
+    uartRXBuff2[uartRxBuffCount2] = huart->Instance->DR;
+    uartRxBuffCount2++;
 
 
 
   }
-  else if(huart == &huart3){//
+  if(huart == &huart3){//
 	  biDirect_Flag = 3;
 
-    uartRXBuff[uartRxBuffCount] = huart->Instance->DR;
-    uartRxBuffCount++;
+    uartRXBuff3[uartRxBuffCount3] = huart->Instance->DR;
+    uartRxBuffCount3++;
 
 
 
   }
-    HAL_UART_Receive_IT(&huart2,&uartRXBuff[uartRxBuffCount],1);
+  HAL_UART_Receive_IT(&huart2,&uartRXBuff2[uartRxBuffCount2],1);
+  HAL_UART_Receive_IT(&huart3,&uartRXBuff3[uartRxBuffCount3],1);
 
 
 

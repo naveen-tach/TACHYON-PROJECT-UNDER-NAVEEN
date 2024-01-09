@@ -16,9 +16,11 @@ extern UART_HandleTypeDef huart1;
 extern UART_HandleTypeDef huart2;
 extern UART_HandleTypeDef huart3;
 
+extern uint16_t uartRxBuffCount3 ;
+extern uint8_t uartRXBuff3[255] ;
 
-extern uint16_t uartRxBuffCount ;
-extern uint8_t uartRXBuff[255] ;
+extern uint16_t uartRxBuffCount2 ;
+extern uint8_t uartRXBuff2[255] ;
 extern uint8_t biDirect_2_Flag ;
 
 void port(uint8_t *data, uint8_t dataSize);

@@ -16,8 +16,13 @@ void UartTransfor(UART_HandleTypeDef *huart,uint8_t *data, uint8_t dataSize)
 
 void clearUartBuff()
 {
-	memset(uartRXBuff,0,sizeof(uartRXBuff));
-	uartRxBuffCount = 0;
+	memset(uartRXBuff2,0,sizeof(uartRXBuff2));
+	uartRxBuffCount2 = 0;
+}
+void clearUartBuff3()
+{
+	memset(uartRXBuff3,0,sizeof(uartRXBuff3));
+	uartRxBuffCount3 = 0;
 }
 
 void ack(uint8_t *biDirectFlag,uint8_t *data, uint8_t size)
@@ -31,7 +36,7 @@ void ack(uint8_t *biDirectFlag,uint8_t *data, uint8_t size)
 		UartTransfor(&huart2,Data,size+1);
 
 	}
-	else if(*biDirectFlag == 3)
+	if(*biDirectFlag == 3)
 	{
 		uint8_t Data[255] ;
 		memset(Data,0,sizeof(Data));
@@ -51,9 +56,9 @@ void bi_directional_port_Comm_init(uint8_t *biDirectFlag)
 		uint8_t data[255] ;
 		memset(data,0,sizeof(data));
 		data[0] = 0x02 ;
-		strcat(data,uartRXBuff);
-		UartTransfor(&huart1, &data,uartRxBuffCount+1);
-		ack(biDirectFlag, uartRXBuff, uartRxBuffCount);
+		strcat(data,uartRXBuff2);
+		UartTransfor(&huart1, &data,uartRxBuffCount2+1);
+		ack(biDirectFlag, uartRXBuff2, uartRxBuffCount2);
 		memset(data,0,sizeof(data));
 		*biDirectFlag = 0 ;
 		clearUartBuff();
@@ -61,17 +66,17 @@ void bi_directional_port_Comm_init(uint8_t *biDirectFlag)
 	}
 	if( *biDirectFlag == 3)
 		{
-			HAL_Delay(10);
+			HAL_Delay(100);
 
 			uint8_t data[255] ;
 			memset(data,0,sizeof(data));
 			data[0] = 0x03 ;
-			strcat(data,uartRXBuff);
-			UartTransfor(&huart1, &data,uartRxBuffCount+1);
-			ack(biDirectFlag, uartRXBuff, uartRxBuffCount);
+			strcat(data,uartRXBuff3);
+			UartTransfor(&huart1, &data,uartRxBuffCount3+1);
+			ack(biDirectFlag, uartRXBuff3, uartRxBuffCount3);
 			memset(data,0,sizeof(data));
 			*biDirectFlag = 0 ;
-			clearUartBuff();
+			clearUartBuff3();
 
 		}
 
