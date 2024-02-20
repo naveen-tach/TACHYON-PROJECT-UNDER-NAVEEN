@@ -1,0 +1,3 @@
+../Core/Src/profile_write.c:16:6:profile_write_Write	16	static
+../Core/Src/profile_write.c:22:6:profile_write_show_data	40	static
+../Core/Src/profile_write.c:34:6:writePage_init	128	static
